@@ -1,0 +1,3 @@
+Puede haber condición de carrera cuando se agrega un nuevo producto a la orden
+ya que primero obtiene la cantidad anterior y despues le suma a este valor 
+la nueva cantidad, también al calcular el todal de la cuenta.
