@@ -138,7 +138,8 @@ axios.get('/orders')
     console.log(response);
   })
   .catch(function (error) {
-    console.log(error);
+    var body = document.getElementById('orders');
+    body.textContent = "There is a problem with our servers. We apologize for the inconvince, please try again later";
   });
 
 
