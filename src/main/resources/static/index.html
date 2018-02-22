@@ -16,7 +16,7 @@
     <link href="./css/cover.css" rel="stylesheet">
   </head>
 
-  <body class="text-center">
+  <body onload = "loadOrders();" class="text-center">
 
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
@@ -33,7 +33,7 @@
       <main role="main" class="inner cover">
         <h1 class="cover-heading">Cover your page.</h1>
         <!--p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p-->
-        <a href = '#' onClick = 'tableCreate();' class="btn btn-lg btn-secondary">Add Order</a>
+        <a href = '#' onClick = '' class="btn btn-lg btn-secondary">Add Order</a>
         <a href = '#' onClick = 'removeOrderById(1);' class="btn btn-lg btn-secondary">Remove Order</a>
 		<div id = "orders">
 			<div id='1'> Order 1
@@ -85,12 +85,12 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./Cover Template for Bootstrap_files/jquery-3.2.1.slim.min.js.descarga" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="./js/jquery-3.2.1.slim.min.js.descarga" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="./js/popper.min.js.descarga"></script>
     <script src="./js/bootstrap.min.js.descarga"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script src ="./js/OrdersController.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src ="./js/OrdersController.js"></script>
 	
   
 

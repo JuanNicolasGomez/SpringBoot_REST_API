@@ -1,21 +1,62 @@
-var order = {
-				"order_id": 2,
-				"table_id": 2,
+var order2 = {
+				"order_id": 1,
+				"table_id": 1,
 				"products": [{
 						"product": "PIZZA",
 						"quantity": 3,
-						"price": "$15.000"
+						"price": "$10.000"
 					},
 					{
-						"product": "HAMBURGER",
+						"product": "HOTDOG",
 						"quantity": 1,
-						"price": "$12.300"
+						"price": "$3000"
+					},
+					{
+						"product": "COKE",
+						"quantity": 4,
+						"price": "$1300"
 					}
 				]
 			}
+
+var mockedList = [{
+					"order_id": 2,
+					"table_id": 2,
+					"products": [{
+							"product": "PIZZA",
+							"quantity": 3,
+							"price": "$15.000"
+						},
+						{
+							"product": "HAMBURGER",
+							"quantity": 1,
+							"price": "$12.300"
+						}
+					]
+				},
+				{
+					"order_id": 3,
+					"table_id": 3,
+					"products": [{
+							"product": "PIZZA",
+							"quantity": 3,
+							"price": "$10.000"
+						},
+						{
+							"product": "HOTDOG",
+							"quantity": 1,
+							"price": "$3000"
+						},
+						{
+							"product": "COKE",
+							"quantity": 4,
+							"price": "$1300"
+						}
+					]
+				}]	
 	
 
-function tableCreate() {
+function addOrder( order) {
     var body = document.getElementById('orders');
 	var p1 = document.createElement('div');
 	p1.id = order['order_id'];
@@ -65,15 +106,23 @@ function tableCreate() {
 			}
 			
 			//i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
-			tr.appendChild(td)
+			tr.appendChild(td);
             //}
         }
         tbdy.appendChild(tr);
     }
     tbl.appendChild(tbdy);
 	
-	tbl.appendChild(thd);
-    p1.appendChild(tbl)
+    tbl.appendChild(thd);
+    p1.appendChild(tbl);
+}
+
+function loadOrders(){
+	for (var i = 0; i<mockedList.length;i++){
+                console.log("");
+		addOrder(mockedList[i]);
+	}
+	
 }
 
 function removeOrderById(id){
@@ -82,13 +131,16 @@ function removeOrderById(id){
 	order.parentNode.removeChild(order);
 }
 
-axios.get('/orders/3')
+axios.get('/orders')
   .then(function (response) {
+    mockedList = response["data"];
+    //loadOrders();
     console.log(response);
   })
   .catch(function (error) {
     console.log(error);
   });
+
 
 //tableCreate();
 
