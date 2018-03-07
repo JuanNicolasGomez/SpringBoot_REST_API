@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.0/examples/cover/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+
+    <title>Cover Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/cover.css" rel="stylesheet">
+</head>
+
+<body onload = "" class="text-center">
+
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">Cover</h3>
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link active" href="https://getbootstrap.com/docs/4.0/examples/cover/#">Home</a>
+                <a class="nav-link" href="https://getbootstrap.com/docs/4.0/examples/cover/#">Features</a>
+                <a class="nav-link" href="https://getbootstrap.com/docs/4.0/examples/cover/#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main" >
+        <h1 class="lead">Update Orders</h1>
+        <!--p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p-->
+        <!--a href = '#' onClick = 'removeOrderById(1);' class="btn btn-lg btn-secondary">Remove Order </a>
+
+        <a href = '#' onClick = '' class="btn btn-lg btn-secondary">Add Order</a-->
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <select id = "selectBox" class="custom-select d-block w-100" id="table" required="" onchange="changeFunc();">
+                    <option value="">Choose table</option>
+                    <option >Table 1</option>
+                    <option >Table 2</option>
+                    <option >Table 3</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a valid country.
+                </div>
+            </div>
+
+        </div >
+        <!--label>New Item</label-->
+        <div class="row">
+
+            <div class="col-3 mb-3">
+                <input type="text" class="form-control" id="item" placeholder="Item Name" value="" required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+
+            </div>
+            <div class="col-3 mb-3">
+                <input type="text" class="form-control" id="quantity" placeholder="Quantity" value="" required="">
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+
+
+            <div class="col-4 mb-3">
+                <a href = '#' onClick = '' class="btn btn-lg btn-primary">Add</a>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-3 mb-3">
+                <label >Item</label>
+            </div>
+            <div class="col-3 mb-3">
+                <label >Quantity</label>
+            </div>
+
+        </div>
+        <div id = "items">
+            <!--div class="item">
+                <div class = "row">
+                    <div class="col-3 mb-3">
+                        <input type="text" class="form-control"  placeholder="Item" value="PIZZA" required="">
+                    </div>
+                    <div class="col-3 mb-3">
+                        <input type="text" class="form-control"  placeholder="Quantity" value="3" required="">
+                    </div>
+                    <div class="col-2 mb-3">
+                        <a href = '#' onClick = '' class="btn btn-md btn-primary">Update</a>
+                    </div>
+                    <div class="col-2 mb-3">
+                        <a href = '#' onClick = '' class="btn btn-md btn-secondary">Remove</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class = "row">
+                    <div class="col-3 mb-3">
+                        <input type="text" class="form-control"  placeholder="Item" value="COKE" required="">
+                    </div>
+                    <div class="col-3 mb-3">
+                        <input type="text" class="form-control"  placeholder="Quantity" value="4" required="">
+                    </div>
+                    <div class="col-2 mb-3">
+                        <a href = '#' onClick = '' class="btn btn-md btn-primary">Update</a>
+                    </div>
+                    <div class="col-2 mb-3">
+                        <a href = '#' onClick = '' class="btn btn-md btn-secondary">Remove</a>
+                    </div>
+                </div>
+            </div-->
+        </div>
+
+
+    </main>
+
+
+    <footer class="mastfoot mt-auto">
+        <div class="inner">
+            <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        </div>
+    </footer>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="./js/jquery-3.2.1.slim.min.js.descarga" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="./js/popper.min.js.descarga"></script>
+<script src="./js/bootstrap.min.js.descarga"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src ="./js/OrdersController.js"></script>
+<script src ="./js/RestaurantRestController.js"></script>
+
+
+
+</body></html>
