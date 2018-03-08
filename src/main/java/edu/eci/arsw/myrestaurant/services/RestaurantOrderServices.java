@@ -27,6 +27,10 @@ public interface RestaurantOrderServices {
 
     Set<Integer> getTablesWithOrders();
 
+    void addItemToOrder(Order order);
+
+    void updateOrder(Order order);
+
     void releaseTable(int tableNumber) throws OrderServicesException;
     
 }

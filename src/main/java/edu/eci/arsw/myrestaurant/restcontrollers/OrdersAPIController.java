@@ -116,19 +116,24 @@ public class OrdersAPIController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<?> controllerAddProductToOrder(@RequestBody String p, @PathVariable int id){
-        Order order;
-        order = ros.getTableOrder(id);
-        if(order!=null){
-            order.addDish(p, 1);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> controllerAddProductToOrder(@RequestBody Order order, @PathVariable int id){
+        try {
+            ros.releaseTable(id);
+        } catch (OrderServicesException e) {
+            Logger.getLogger(OrdersAPIController.class.getName()).log(Level.SEVERE, null, e);
         }
+        try {
+            ros.addNewOrderToTable(order);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (OrderServicesException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
     }
     
-    @RequestMapping( method = RequestMethod.DELETE)
-    public ResponseEntity<?> controllerDeleteOrder(@RequestBody int id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> controllerDeleteOrderItem(@PathVariable int id){
         try {
             ros.releaseTable(id);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -137,4 +142,5 @@ public class OrdersAPIController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }

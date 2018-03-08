@@ -17,14 +17,19 @@ var RestControllerModule = (function () {
   };
 
   var updateOrder = function (order, callback) {
-    // todo implement
-  };
+    axios.put('/orders' + '/' + order.tableNumber,order
+        ).then(function (response) {
+            callback.onSuccess();
+        })
+        .catch(function (error) {
+            callback.onFailed(error);
+
+        });
+      };
 
   var deleteOrder = function (orderId, callback) {
-    // todo implement
-    axios.delete('/orders', {
-        id : orderId
-    }).then(function (response) {
+    axios.delete('/orders' + '/' + orderId,
+    ).then(function (response) {
         callback.onSuccess();
     })
     .catch(function (error) {
@@ -32,6 +37,8 @@ var RestControllerModule = (function () {
 
     });
   };
+
+
 
   var createOrder = function (order, callback) {
     // todo implement

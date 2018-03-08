@@ -24,15 +24,68 @@ var OrdersControllerModule = (function () {
   };
 
   var updateOrder = function () {
-    // todo implement
+    console.log(currentOrderId);
+    var name = document.getElementById("itemInput").value;
+    var quantity = document.getElementById("quantityInput").value;
+    if(name != "" && quantity != ""){
+        addItemToOrder(currentOrderId,name,quantity);
+    }
   };
 
   var deleteOrderItem = function (itemName) {
-    // todo implement
+    var callback = {
+        onSuccess: function(){
+            console.log("Item deleted successfully");
+            getOrders();
+            showOrderToUpdateById(currentOrderId);
+            },
+        onFailed: function(exception){
+            //console.log(exception);
+            console.log("Couldn't delete item, please try again later");
+        }
+    };
+    var order;
+    for (var o in mockedList){
+      if(mockedList[o].tableNumber == currentOrderId){
+              order = mockedList[o];
+          }
+      }
+    delete order.orderAmountsMap[itemName];
+    console.log("order whit deleted item:")
+    console.log(order);
+    RestControllerModule.updateOrder (order, callback);
   };
 
-  var addItemToOrder = function (orderId, item) {
-    // todo implement
+  var deleteItem = function(num){
+    deleteOrderItem(document.getElementById("itname" + num).value);
+  }
+
+  var addItemToOrder = function (orderId, item, quantity) {
+
+    var callback = {
+        onSuccess: function(){
+            console.log("Item added successfully");
+            getOrders();
+            showOrderToUpdateById(currentOrderId);
+            },
+        onFailed: function(exception){
+            //console.log(exception);
+            console.log(currentOrderId);
+            console.log("There was a problem adding the item, please try again later");
+        }
+    };
+    var order;
+    for (var o in mockedList){
+      if(mockedList[o].tableNumber == orderId){
+              order = mockedList[o];
+          }
+      }
+    if (order == null){
+        order = {"orderAmountsMap":{}, "tableNumber": orderId};
+    }
+    order.orderAmountsMap[item] = parseInt(quantity);
+    console.log("Adding item: "+item +" to order:  " + order.tableNumber + "...")
+    RestControllerModule.updateOrder (order, callback);
   };
 
   var getOrders = function () {
@@ -51,17 +104,26 @@ var OrdersControllerModule = (function () {
       RestControllerModule.getOrders(callback);
     };
 
+   var selectTableFunction = function() {
+       var selectBox = document.getElementById("selectBox");
+       currentOrderId = selectBox.selectedIndex;
+       showOrderToUpdateById(selectBox.selectedIndex);
+   };
+
   return {
     showOrdersByTable: showOrdersByTable,
     updateOrder: updateOrder,
     deleteOrderItem: deleteOrderItem,
     addItemToOrder: addItemToOrder,
-    getOrders: getOrders
+    getOrders: getOrders,
+    selectTableFunction: selectTableFunction,
+    deleteItem: deleteItem
   };
 
 })();
-var mockedList = [{"orderAmountsMap":{"PIZZA":3,"HOTDOG":1,"COKE":4},"tableNumber":1},{"orderAmountsMap":{"HAMBURGER":2,"COKE":2},"tableNumber":3}];
-	
+var mockedList ;
+//= [{"orderAmountsMap":{"PIZZA":3,"HOTDOG":1,"COKE":4},"tableNumber":1},{"orderAmountsMap":{"HAMBURGER":2,"COKE":2},"tableNumber":3}];
+var currentOrderId = 0;
 
 function showOrder( order) {
     var body = document.getElementById('orders');
@@ -131,11 +193,12 @@ function showOrderToUpdateById( id){
         }
     }
     if(order == null){
-        alert("That table doesn't have any orders.");
+        body.innerHTML = "This table doesn't have any orders.";
     }else{
         var prd = order.orderAmountsMap;
-
+        var n = 0;
         for (var key in prd){
+            n+=1;
             var it = document.createElement('div');
             body.appendChild(it);
             var rw = document.createElement('div');
@@ -154,6 +217,7 @@ function showOrderToUpdateById( id){
             rw.appendChild(col3);
             rw.appendChild(col4);
             var in1 = document.createElement('input');
+            in1.id = "itname" + n;
             in1.setAttribute("type","text");
             in1.className = "form-control";
             in1.setAttribute("type","text");
@@ -161,7 +225,8 @@ function showOrderToUpdateById( id){
             in1.setAttribute("value", key);
             col1.appendChild(in1);
             var in2 = document.createElement('input');
-            in1.setAttribute("type","text");
+            in2.id = "itq" + n;
+            in2.setAttribute("type","text");
             in2.className = "form-control";
             in2.setAttribute("type","text");
             in2.setAttribute("placeholder","Quantity");
@@ -176,6 +241,7 @@ function showOrderToUpdateById( id){
             b2.setAttribute("href", "#");
             b2.className = "btn btn-md btn-secondary";
             b2.innerHTML = "Delete";
+            b2.setAttribute("onclick", "OrdersControllerModule.deleteItem(" + n +");")
             col4.appendChild(b2);
         }
 
@@ -184,10 +250,7 @@ function showOrderToUpdateById( id){
 
 }
 
-function changeFunc() {
-    var selectBox = document.getElementById("selectBox");
-    showOrderToUpdateById(selectBox.selectedIndex);
-}
+
 
 function removeOrderById(id){
 	var order = document.getElementById(id);

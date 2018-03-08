@@ -75,6 +75,16 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
     }
 
     @Override
+    public void updateOrder(Order order){
+        Order o;
+        //o = getTableOrder()
+    }
+
+    public void addItemToOrder(Order order){
+
+    }
+
+    @Override
     public int calculateTableBill(int tableNumber) throws OrderServicesException {
         if (!tableOrders.containsKey(tableNumber)) {
             throw new OrderServicesException("Mesa inexistente o ya liberada:" + tableNumber);
