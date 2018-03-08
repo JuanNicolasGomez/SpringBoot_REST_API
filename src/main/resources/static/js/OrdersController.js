@@ -51,13 +51,14 @@ var OrdersControllerModule = (function () {
           }
       }
     delete order.orderAmountsMap[itemName];
-    console.log("order whit deleted item:")
+    console.log("Order with deleted item:")
     console.log(order);
     RestControllerModule.updateOrder (order, callback);
   };
 
   var deleteItem = function(num){
     deleteOrderItem(document.getElementById("itname" + num).value);
+
   }
 
   var addItemToOrder = function (orderId, item, quantity) {
@@ -88,6 +89,34 @@ var OrdersControllerModule = (function () {
     RestControllerModule.updateOrder (order, callback);
   };
 
+  var updateOrderItem = function (itemName, itemQuantity){
+    var callback = {
+        onSuccess: function(){
+            console.log("Item updated successfully");
+            getOrders();
+            showOrderToUpdateById(currentOrderId);
+            },
+        onFailed: function(exception){
+            //console.log(exception);
+            console.log("Couldn't update item, please try again later");
+        }
+    };
+    var order;
+    for (var o in mockedList){
+      if(mockedList[o].tableNumber == currentOrderId){
+              order = mockedList[o];
+          }
+      }
+    order.orderAmountsMap[itemName] = itemQuantity;
+    console.log("Order with updated item:")
+    console.log(order);
+    RestControllerModule.updateOrder (order, callback);
+  }
+
+  var updateItem = function(num){
+    updateOrderItem(document.getElementById("itname" + num).value, document.getElementById("itq" + num).value );
+  }
+
   var getOrders = function () {
 
       var callback = {
@@ -117,7 +146,8 @@ var OrdersControllerModule = (function () {
     addItemToOrder: addItemToOrder,
     getOrders: getOrders,
     selectTableFunction: selectTableFunction,
-    deleteItem: deleteItem
+    deleteItem: deleteItem,
+    updateItem: updateItem
   };
 
 })();
@@ -236,6 +266,7 @@ function showOrderToUpdateById( id){
             b1.setAttribute("href", "#");
             b1.className = "btn btn-md btn-primary";
             b1.innerHTML = "Update";
+            b1.setAttribute("onclick", "OrdersControllerModule.updateItem(" + n +");")
             col3.appendChild(b1);
             var b2 = document.createElement('a');
             b2.setAttribute("href", "#");
